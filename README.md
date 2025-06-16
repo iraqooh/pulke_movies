@@ -25,8 +25,8 @@ Pulke Movies is a feature-rich movie discovery web application designed to help 
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/pulke-movies.git
-   cd pulke-movies
+   git clone https://github.com/iraqooh/pulke_movies.git
+   cd pulke_movies
    ```
 2. Install dependencies:
    ```bash

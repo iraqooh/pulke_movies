@@ -1,0 +1,1530 @@
+Pulke Movies
+
+1. Core Movie Search and Discovery Features
+- Advanced Search Engine:
+  - Search by title, genre, director, actor, release year, or keyword.
+  - Support for natural language queries (e.g., "best sci-fi movies of 2023").
+  - Fuzzy search to handle misspellings or partial matches.
+- Filters and Sorting:
+  - Filter by genre (e.g., action, drama, comedy), release date, runtime, language, country, rating (e.g., PG-13, R), IMDb/RT score, or streaming platform availability.
+  - Sort results by popularity, rating, release date, or alphabetical order.
+- Movie Details Page:
+  - Display comprehensive movie information: title, synopsis, cast, crew, release date, runtime, genre, ratings (IMDb, Rotten Tomatoes, Metacritic), and user reviews.
+  - Show trailers, posters, and stills.
+  - Provide links to streaming platforms (e.g., Netflix, Hulu, Amazon Prime) with availability by region.
+- Browse Categories:
+  - Predefined categories like "Trending Now," "New Releases," "Classics," "Award Winners," or "Hidden Gems."
+  - Curated collections (e.g., "Best of Oscars 2020s," "Cult Horror Films").
+
+---
+
+2. User Experience and Interface Features
+- Responsive Design:
+  - Optimized for desktop, tablet, and mobile devices with a consistent UI.
+  - Progressive Web App (PWA) support for offline access and app-like experience.
+- Intuitive Navigation:
+  - Clean, modern interface with a search bar prominently displayed.
+  - Breadcrumb navigation and easy access to home, browse, and user profile pages.
+- Dark/Light Mode:
+  - Toggle between dark and light themes for user comfort.
+- Accessibility Features:
+  - Compliance with WCAG standards (e.g., screen reader support, keyboard navigation).
+  - High-contrast mode and adjustable font sizes.
+- Fast Load Times:
+  - Optimized performance with lazy loading for images and infinite scroll for search results.
+- Interactive Elements:
+  - Hover effects for movie posters showing quick details (e.g., rating, runtime).
+  - Playable trailers directly on the site with minimal buffering.
+- Error Handling:
+  - User-friendly error messages for failed searches or unavailable content.
+  - Suggestions for similar movies when no exact match is found.
+
+---
+
+3. Personalization and Recommendation Features
+- User Profiles:
+  - Account creation with email, social media (Google, Facebook) login.
+  - Customizable profiles with avatars, bio, and favorite genres.
+- Recommendation Engine:
+  - AI-driven recommendations based on user’s watch history, ratings, and preferences.
+  - Collaborative filtering (e.g., "Users who liked this also watched…").
+  - Content-based recommendations (e.g., similar genres, directors, or themes).
+- Watchlist:
+  - Add movies to a personalized watchlist with options to categorize (e.g., "Must Watch," "Maybe Later").
+  - Notifications for watchlist movies becoming available on streaming platforms.
+- Rating and Review System:
+  - Allow users to rate movies (e.g., 1-5 stars) and write reviews.
+  - Display average user ratings alongside critic scores.
+- Viewing History:
+  - Track watched movies with timestamps and option to mark as "watched."
+  - Option to hide or delete history entries.
+- Preference Settings:
+  - Set preferred genres, languages, or streaming platforms for tailored recommendations.
+  - Opt-in for mature content or family-friendly filters.
+
+---
+
+4. Social and Community Features
+- Social Sharing:
+  - Share movie recommendations or watchlists via social media (X, Facebook, WhatsApp) or direct links.
+  - Embeddable movie cards with posters and details.
+- Community Reviews and Discussions:
+  - Comment sections for movie pages with upvote/downvote functionality.
+
+---
+
+5. Content and Data Features
+- Rich Movie Database:
+  - Integration with TMDb API for accurate, up-to-date movie data.
+- Dynamic Updates:
+  - Real-time updates for new releases, streaming availability, and ratings.
+  - News section for movie-related updates (e.g., upcoming releases, awards).
+- Related Content:
+  - Show related movies, sequels, prequels, or films by the same director/actor.
+- Box Office Data:
+  - Show box office earnings, budget, and profit metrics.
+
+---
+
+6. Administrative and Backend Features
+- Content Management System (CMS):
+  - Admin panel to add, edit, or remove movie entries.
+  - Tools to manage curated collections and featured content.
+- User Management:
+  - Admin tools to monitor user activity, ban accounts, or manage reported content.
+  - Role-based access for moderators or content editors.
+- Analytics Dashboard:
+  - Track user engagement metrics (e.g., searches, watchlist additions, page views).
+  - Monitor popular movies, genres, or streaming platforms.
+- Moderation Tools:
+  - Automated and manual moderation for user reviews and comments to prevent spam or abuse.
+  - Report system for users to flag inappropriate content.
+
+---
+
+7. Security and Privacy Features
+- Secure Authentication:
+  - Encrypted user data storage.
+- Privacy Controls:
+  - Options to make watchlists, ratings, or profiles private.
+  - GDPR/CCPA compliance for data protection.
+- Data Export:
+  - Allow users to export their watchlist, ratings, or history as CSV/JSON.
+- Secure Connections:
+  - HTTPS encryption for all data transfers.
+  - Protection against SQL injection, XSS, and other vulnerabilities.
+
+---
+
+## Implementation Plan for Pulke Movies ############################################################################################################
+😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁
+
+1. Project Overview
+- Objective: Build a feature-rich, user-friendly movie finder web app with advanced search, personalization, and social features, leveraging React for the frontend, Axios for API calls, and TMDb API for movie data.
+- Tech Stack:
+  - Frontend: React (with Hooks and Context API), React Router, Tailwind CSS (or styled-components for styling), Vite/Webpack for bundling.
+  - API Integration: Axios for HTTP requests to TMDb API and any custom backend APIs.
+  - Database: Firebase Firestore (for user data, watchlists, and reviews).
+  - Authentication: Firebase Auth for secure user login (email, Google, Facebook).
+  - Deployment: Vercel for frontend.
+  - Other Tools: TMDb API, PWA (Workbox), Jest/React Testing Library for testing, ESLint/Prettier for code quality.
+
+2. Project Phases
+
+Phase 1: Planning and Setup (1-2 weeks)
+  - Project Setup:
+    - Initialize React project with Vite (`npm create vite@latest`).  ✅
+    - Install dependencies: Axios, React Router, Tailwind CSS, and Firebase/Auth0.  ✅
+    - Set up ESLint, Prettier, and Husky for code quality and pre-commit hooks.  ✅
+    - Configure environment variables for TMDb API key.  ✅
+
+Phase 2: Core Features Development (4-6 weeks)
+- Tasks:
+  - Frontend Components:
+    - Create reusable components: `SearchBar`, `MovieCard`, `MovieDetails`, `FilterPanel`, `CategoryList`.
+    - Use React Router for navigation (e.g., `/`, `/search`, `/movie/:id`, `/browse/:category`).
+    - Implement responsive layouts with Tailwind CSS.
+  - Search and Discovery:
+    - Build advanced search with Axios calls to TMDb API (`/search/movie`, `/search/multi`).
+    - Implement fuzzy search using a library like `fuse.js` for handling misspellings.
+    - Support natural language queries by parsing input (e.g., regex or simple NLP library like `compromise`).
+    - Add filters (genre, year, rating) and sorting (popularity, release date) using TMDb API parameters.
+  - Movie Details Page:
+    - Fetch movie details (`/movie/:id`), credits (`/movie/:id/credits`), and images (`/movie/:id/images`).
+    - Display trailers using TMDb’s video endpoint (`/movie/:id/videos`).
+    - Integrate streaming availability via TMDb’s watch providers endpoint (`/movie/:id/watch/providers`).
+  - Browse Categories:
+    - Create predefined category pages using TMDb endpoints like `/movie/popular`, `/movie/top_rated`, `/movie/now_playing`.
+    - Curate collections manually or use TMDb’s genre-based filtering.
+  - Performance Optimization:
+    - Implement lazy loading for images using `react-lazy-load-image-component`.
+    - Add infinite scroll for search results with `react-infinite-scroll-component`.
+  - Error Handling:
+    - Display user-friendly error messages for failed API calls.
+    - Suggest similar movies using TMDb’s `/movie/:id/similar` endpoint for no-match searches.
+- Deliverables:
+  - Functional search engine, filters, and movie details page.
+  - Responsive UI with lazy loading and infinite scroll.
+  - Basic error handling and suggestions.
+
+Phase 3: User Experience Enhancements (3-4 weeks)
+- Goals:
+  - Enhance UI/UX with accessibility, themes, and interactive elements.
+  - Implement PWA for offline support.
+- Tasks:
+  - Responsive Design and PWA:
+    - Test responsiveness across devices using Tailwind’s responsive classes.
+    - Configure Workbox for PWA (offline caching, service workers).
+  - Dark/Light Mode:
+    - Implement theme toggle with `useContext` or `useState` and persist with localStorage.
+    - Use Tailwind’s dark mode classes (`dark:` prefix).
+  - Accessibility:
+    - Ensure WCAG compliance: ARIA labels, keyboard navigation, and screen reader support.
+    - Add high-contrast mode and font size adjustments via CSS variables.
+  - Interactive Elements:
+    - Add hover effects on `MovieCard` to show quick details (rating, runtime).
+    - Embed YouTube trailers using `react-youtube` with autoplay and minimal buffering.
+  - Navigation:
+    - Implement breadcrumb navigation using React Router.
+    - Ensure prominent search bar and easy access to home, browse, and profile pages.
+- Deliverables:
+  - Accessible, responsive UI with dark/light mode.
+  - PWA setup for offline access.
+  - Interactive hover effects and trailer playback.
+
+Phase 4: Personalization and User Features (4-5 weeks)
+- Goals:
+  - Build user authentication, profiles, watchlists, and recommendation engine.
+  - Integrate backend for user data storage.
+- Tasks:
+  - Authentication:
+    - Set up Firebase Auth or Auth0 for email and social logins (Google, Facebook).
+    - Implement secure session management and JWT tokens.
+  - User Profiles:
+    - Create profile page with avatar upload, bio, and favorite genres (stored in Firebase Firestore or MongoDB).
+    - Allow privacy settings for profiles, watchlists, and ratings.
+  - Watchlist:
+    - Build watchlist feature with add/remove functionality (stored in backend).
+    - Categorize watchlist entries (e.g., “Must Watch,” “Maybe Later”).
+    - Notify users of streaming availability changes via TMDb’s watch providers API.
+  - Recommendation Engine:
+    - Implement basic content-based recommendations using TMDb’s `/movie/:id/similar` and genre filtering.
+    - Use collaborative filtering by analyzing user ratings/watchlists (store in backend and process with simple algorithms or libraries like `ml-recommendation`).
+  - Rating and Review System:
+    - Allow users to rate movies (1-5 stars) and write reviews (stored in backend).
+    - Display average user ratings alongside TMDb’s critic scores.
+  - Viewing History:
+    - Track watched movies with timestamps in backend.
+    - Provide options to hide/delete history entries.
+  - Preference Settings:
+    - Allow users to set preferred genres, languages, and platforms in profile settings.
+    - Implement family-friendly or mature content filters.
+- Deliverables:
+  - User authentication and profile management.
+  - Functional watchlist, ratings, reviews, and basic recommendations.
+
+Phase 5: Social and Community Features (2-3 weeks)
+- Goals:
+  - Enable social sharing and community interactions.
+- Tasks:
+  - Social Sharing:
+    - Add share buttons for X, Facebook, WhatsApp using `react-share`.
+    - Create embeddable movie cards with posters and details.
+  - Community Features:
+    - Implement comment sections on movie pages using Firebase Firestore or MongoDB.
+    - Add upvote/downvote functionality for comments.
+    - Include moderation tools to flag/report inappropriate comments.
+- Deliverables:
+  - Social sharing functionality.
+  - Comment sections with upvote/downvote and moderation.
+
+Phase 6: Backend and Administrative Features (3-4 weeks)
+- Goals:
+  - Develop backend for user data and admin tools.
+  - Ensure scalability and security.
+- Tasks:
+  - Backend Setup:
+    - Set up Node.js/Express or Firebase for user data, watchlists, and reviews.
+    - Use MongoDB or Firestore for database.
+  - Content Management System (CMS):
+    - Build admin panel with React and protected routes (e.g., `/admin`).
+    - Allow admins to add/edit curated collections or featured content.
+  - User Management:
+    - Create admin tools to monitor user activity, ban accounts, or manage reported content.
+    - Implement role-based access for moderators.
+  - Analytics Dashboard:
+    - Track engagement metrics (searches, watchlist additions) using Firebase Analytics or custom MongoDB queries.
+    - Display popular movies/genres in admin panel.
+  - Moderation Tools:
+    - Implement automated moderation (e.g., profanity filters) and manual review for reported content.
+  - Security:
+    - Use HTTPS for all API calls.
+    - Implement input validation to prevent SQL injection and XSS.
+    - Ensure GDPR/CCPA compliance with data export options (CSV/JSON).
+- Deliverables:
+  - Functional backend with CMS and admin panel.
+  - Secure user data management and analytics.
+
+Phase 7: Testing and Optimization (2-3 weeks)
+- Goals:
+  - Ensure app reliability, performance, and accessibility.
+  - Prepare for deployment.
+- Tasks:
+  - Unit Testing:
+    - Write tests for components, API calls, and utilities using Jest and React Testing Library.
+  - Integration Testing:
+    - Test API integrations with TMDb and backend.
+  - Performance Testing:
+    - Optimize API calls with debouncing/throttling for search.
+    - Use React’s `useMemo` and `useCallback` to prevent unnecessary re-renders.
+  - Accessibility Testing:
+    - Use tools like Lighthouse or axe to verify WCAG compliance.
+  - Cross-Browser Testing:
+    - Test on Chrome, Firefox, Safari, and Edge.
+  - Optimization:
+    - Minify assets and enable code splitting with React Lazy/Suspense.
+    - Cache API responses using localStorage or service workers.
+- Deliverables:
+  - Test suite with >80% coverage.
+  - Optimized, accessible, and cross-browser compatible app.
+
+Phase 8: Deployment and Maintenance (1-2 weeks)
+- Goals:
+  - Deploy the app and set up monitoring.
+  - Plan for ongoing maintenance.
+- Tasks:
+  - Deployment:
+    - Deploy frontend to Vercel/Netlify.
+    - Deploy backend (if custom) to Heroku/AWS.
+    - Configure CI/CD pipeline with GitHub Actions.
+  - Monitoring:
+    - Set up error tracking with Sentry.
+    - Monitor performance with Google Analytics or Firebase Analytics.
+  - Maintenance Plan:
+    - Schedule regular TMDb API updates for new releases and streaming data.
+    - Monitor user feedback for bug fixes and feature requests.
+- Deliverables:
+  - Live app on production.
+  - Monitoring and maintenance plan.
+
+3. Project Timeline
+- Total Duration: ~20-26 weeks (5-6.5 months)
+- Breakdown:
+  - Phase 1: 1-2 weeks
+  - Phase 2: 4-6 weeks
+  - Phase 3: 3-4 weeks
+  - Phase 4: 4-5 weeks
+  - Phase 5: 2-3 weeks
+  - Phase 6: 3-4 weeks
+  - Phase 7: 2-3 weeks
+  - Phase 8: 1-2 weeks
+- MVP Timeline: ~10-12 weeks (Phases 1-3 + basic user features from Phase 4)
+
+4. Team and Roles
+- Frontend Developer(s): Build React components, UI, and API integrations.
+- Backend Developer (Optional): Set up Node.js/Express or Firebase for user data and CMS.
+- UI/UX Designer: Create wireframes, mockups, and ensure accessibility.
+- QA Engineer: Conduct testing for functionality, performance, and accessibility.
+- Project Manager: Oversee timeline, scope, and coordination.
+
+5. Risks and Mitigation
+- Risk: TMDb API rate limits.
+  - Mitigation: Cache API responses and implement retry logic for rate-limited requests.
+- Risk: Complex recommendation engine delays.
+  - Mitigation: Start with basic content-based recommendations and iterate later.
+- Risk: Accessibility compliance issues.
+  - Mitigation: Use automated tools (Lighthouse, axe) and manual testing early in development.
+- Risk: Backend scalability.
+  - Mitigation: Use Firebase for rapid scaling or optimize MongoDB queries for performance.
+
+6. Success Metrics
+- User Engagement: >70% of users return within a week.
+- Performance: Page load time <2 seconds, API response time <500ms.
+- Accessibility: Lighthouse accessibility score >90.
+- Adoption: 1,000 active users within 3 months post-launch.
+
+================================================================================================================================
+
+### 6. Generate Test Scripts for TMDb API
+- **Task**: Create scripts to test TMDb API endpoints.
+- **Steps**:
+  1. **Create API Utility**:
+     - Create `src/api/tmdb.js`:
+       ```js
+       import axios from 'axios';
+       import { TMDB_API_KEY, TMDB_BASE_URL } from './config';
+
+       const tmdb = axios.create({
+         baseURL: TMDB_BASE_URL,
+         params: {
+           api_key: TMDB_API_KEY,
+         },
+       });
+
+       export const searchMovies = async (query) => {
+         try {
+           const response = await tmdb.get('/search/movie', {
+             params: { query },
+           });
+           return response.data.results;
+         } catch (error) {
+           console.error('Error searching movies:', error);
+           return [];
+         }
+       };
+
+       export const getMovieDetails = async (id) => {
+         try {
+           const response = await tmdb.get(`/movie/${id}`);
+           return response.data;
+         } catch (error) {
+           console.error('Error fetching movie details:', error);
+           return null;
+         }
+       };
+       ```
+  2. **Create Test Scripts**:
+     - Create `scripts/test-tmdb.js` for Node.js testing:
+       ```js
+       const axios = require('axios');
+
+       const TMDB_API_KEY = process.env.VITE_TMDB_API_KEY;
+       const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+
+       const testSearch = async () => {
+         try {
+           const response = await axios.get(`${TMDB_BASE_URL}/search/movie`, {
+             params: {
+               api_key: TMDB_API_KEY,
+               query: 'Inception',
+             },
+           });
+           console.log('Search Results:', response.data.results.slice(0, 2));
+         } catch (error) {
+           console.error('Search Error:', error.message);
+         }
+       };
+
+       const testMovieDetails = async () => {
+         try {
+           const response = await axios.get(`${TMDB_BASE_URL}/movie/27205`, {
+             params: {
+               api_key: TMDB_API_KEY,
+             },
+           });
+           console.log('Movie Details:', {
+             title: response.data.title,
+             id: response.data.id,
+           });
+         } catch (error) {
+           console.error('Details Error:', error.message);
+         }
+       };
+
+       const runTests = async () => {
+         console.log('Testing TMDb API...');
+         await testSearch();
+         await testMovieDetails();
+       };
+
+       runTests();
+       ```
+  3. **Run Test Scripts**:
+     - Install Node.js dependencies for the script:
+       ```bash
+       npm install axios
+       ```
+     - Run the script:
+       ```bash
+       node scripts/test-tmdb.js
+       ```
+     - Expected output:
+       ```
+       Testing TMDb API...
+       Search Results: [
+         { id: 27205, title: 'Inception', ... },
+         { id: ..., title: '...', ... }
+       ]
+       Movie Details: { title: 'Inception', id: 27205 }
+       ```
+  4. **Add Script to `package.json`**:
+     - Update `package.json`:
+       ```json
+       "scripts": {
+         "dev": "vite",
+         "build": "vite build",
+         "lint": "eslint src --ext js,jsx",
+         "preview": "vite preview",
+         "test:tmdb": "node scripts/test-tmdb.js"
+       }
+       ```
+     - Run:
+       ```bash
+       npm run test:tmdb
+       ```
+
+- **Deliverable**: Test scripts for TMDb API endpoints.
+
+---
+
+### 7. Push Changes to GitHub
+- **Task**: Commit and push the setup to the GitHub repository.
+- **Steps**:
+  1. Stage and commit changes:
+     ```bash
+     git add .
+     git commit -m "Initial project setup with Vite, dependencies, and TMDb API tests"
+     ```
+  2. Push to GitHub:
+     ```bash
+     git push origin main
+     ```
+  3. Verify on GitHub:
+     - Check the repository to ensure all files (`src`, `.env.example`, `scripts`, etc.) are uploaded.
+
+---
+
+### Final Project Structure
+After completing the setup, the project structure should look like this:
+```
+pulke-movies/
+├── .env.example
+├── .eslintrc.json
+├── .gitignore
+├── .husky/
+│   └── pre-commit
+├── .prettierrc
+├── .prettierignore
+├── index.html
+├── package.json
+├── postcss.config.js
+├── scripts/
+│   └── test-tmdb.js
+├── src/
+│   ├── api/
+│   │   ├── config.js
+│   │   └── tmdb.js
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+│   └── assets/
+├── tailwind.config.js
+├── vite.config.js
+├── README.md
+├── LICENSE
+```
+
+---
+
+### Notes
+- **Security**: Never commit `.env` to GitHub. Use `.env.example` to share variable names.
+- **Firebase Setup**: Ensure Firebase project is configured before proceeding with authentication or Firestore features.
+- **TMDb API**: Test scripts use the `Inception` movie (ID: 27205) as a sample. Update with other IDs or queries as needed.
+- **Vercel Deployment**: Deployment to Vercel will be handled in Phase 8, but you can test locally with `npm run dev`.
+
+Let me know if you need help with any specific step, code debugging, or the next phase of development!
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB5ywFy_PPbaJsPJ8bLYTbNGAj0cN-mXhc",
+  authDomain: "pulke-50381.firebaseapp.com",
+  projectId: "pulke-50381",
+  storageBucket: "pulke-50381.firebasestorage.app",
+  messagingSenderId: "796903981732",
+  appId: "1:796903981732:web:a8cf2f29a9c535c15fdc31",
+  measurementId: "G-V9FX3C1WTF"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+---
+
+## Implementation: Phase 2 - Core Features Development
+
+### Project Context
+- **Tech Stack**: React (Vite), Axios, React Router, Tailwind CSS, Firebase (for future user features), TMDb API.
+- **Assumptions**:
+  - Project setup from Phase 1 is complete (GitHub repo, Vite project, dependencies, environment variables, TMDb API test scripts).
+  - TMDb API key is stored in `.env` as `VITE_TMDB_API_KEY`.
+  - Firebase is configured but not used in this phase.
+- **Directory Structure** (updated during this phase):
+  ```
+  pulke-movies/
+  ├── src/
+  │   ├── api/
+  │   │   ├── config.js
+  │   │   └── tmdb.js
+  │   ├── components/
+  │   │   ├── SearchBar.jsx
+  │   │   ├── MovieCard.jsx
+  │   │   ├── MovieDetails.jsx
+  │   │   ├── FilterPanel.jsx
+  │   │   └── CategoryList.jsx
+  │   ├── pages/
+  │   │   ├── Home.jsx
+  │   │   ├── Search.jsx
+  │   │   ├── Movie.jsx
+  │   │   ├── Browse.jsx
+  │   │   └── NotFound.jsx
+  │   ├── App.jsx
+  │   ├── index.css
+  │   ├── main.jsx
+  │   └── assets/
+  ├── scripts/
+  │   └── test-tmdb.js
+  ├── .env
+  ├── tailwind.config.js
+  ├── vite.config.js
+  └── package.json
+  ```
+
+---
+
+### 1. Create Reusable Components
+**Task**: Create `SearchBar`, `MovieCard`, `MovieDetails`, `FilterPanel`, and `CategoryList` components.
+
+#### Steps
+1. **Create Components Directory**:
+   - Run:
+     ```bash
+     mkdir src/components
+     touch src/components/{SearchBar.jsx,MovieCard.jsx,MovieDetails.jsx,FilterPanel.jsx,CategoryList.jsx}
+     ```
+
+2. **SearchBar.jsx**:
+   - A search input with a submit button, supporting natural language queries.
+   ```jsx
+   // src/components/SearchBar.jsx
+   import { useState } from 'react';
+   import { useNavigate } from 'react-router-dom';
+
+   const SearchBar = () => {
+     const [query, setQuery] = useState('');
+     const navigate = useNavigate();
+
+     const handleSubmit = (e) => {
+       e.preventDefault();
+       if (query.trim()) {
+         navigate(`/search?q=${encodeURIComponent(query)}`);
+       }
+     };
+
+     return (
+       <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto my-4">
+         <div className="relative">
+           <input
+             type="text"
+             value={query}
+             onChange={(e) => setQuery(e.target.value)}
+             placeholder="Search movies, genres, actors..."
+             className="w-full p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+           />
+           <button
+             type="submit"
+             className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+           >
+             Search
+           </button>
+         </div>
+       </form>
+     );
+   };
+
+   export default SearchBar;
+   ```
+
+3. **MovieCard.jsx**:
+   - Displays a movie poster, title, and rating with hover effects.
+   ```jsx
+   // src/components/MovieCard.jsx
+   import { LazyLoadImage } from 'react-lazy-load-image-component';
+   import 'react-lazy-load-image-component/src/effects/blur.css';
+   import { Link } from 'react-router-dom';
+
+   const MovieCard = ({ movie }) => {
+     const posterUrl = movie.poster_path
+       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+       : 'https://via.placeholder.com/200x300?text=No+Poster';
+
+     return (
+       <Link to={`/movie/${movie.id}`} className="group">
+         <div className="relative overflow-hidden rounded-lg shadow-md">
+           <LazyLoadImage
+             src={posterUrl}
+             alt={movie.title}
+             effect="blur"
+             className="w-full h-72 object-cover"
+           />
+           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity flex items-end p-2">
+             <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity">
+               <h3 className="text-sm font-semibold">{movie.title}</h3>
+               <p className="text-xs">Rating: {movie.vote_average?.toFixed(1)}</p>
+             </div>
+           </div>
+         </div>
+       </Link>
+     );
+   };
+
+   export default MovieCard;
+   ```
+
+4. **MovieDetails.jsx**:
+   - Displays comprehensive movie information (title, synopsis, cast, trailers, etc.).
+   ```jsx
+   // src/components/MovieDetails.jsx
+   import { LazyLoadImage } from 'react-lazy-load-image-component';
+   import YouTube from 'react-youtube';
+
+   const MovieDetails = ({ movie, credits, videos, providers }) => {
+     const posterUrl = movie.poster_path
+       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+       : 'https://via.placeholder.com/500x750?text=No+Poster';
+     const trailer = videos?.find((video) => video.type === 'Trailer' && video.site === 'YouTube');
+
+     return (
+       <div className="container mx-auto p-4 text-gray-900 dark:text-white">
+         <div className="flex flex-col md:flex-row gap-6">
+           <LazyLoadImage src={posterUrl} alt={movie.title} className="w-64 rounded-lg" />
+           <div className="flex-1">
+             <h1 className="text-3xl font-bold">{movie.title}</h1>
+             <p className="text-sm text-gray-600 dark:text-gray-400">{movie.release_date}</p>
+             <p className="mt-2">{movie.overview}</p>
+             <div className="mt-4">
+               <p>Genres: {movie.genres?.map((g) => g.name).join(', ')}</p>
+               <p>Runtime: {movie.runtime} minutes</p>
+               <p>Rating: {movie.vote_average?.toFixed(1)}/10</p>
+             </div>
+             <div className="mt-4">
+               <h2 className="text-xl font-semibold">Cast</h2>
+               <p>{credits?.cast?.slice(0, 5).map((c) => c.name).join(', ')}</p>
+             </div>
+             {trailer && (
+               <div className="mt-4">
+                 <h2 className="text-xl font-semibold">Trailer</h2>
+                 <YouTube videoId={trailer.key} className="w-full max-w-lg" />
+               </div>
+             )}
+             {providers && (
+               <div className="mt-4">
+                 <h2 className="text-xl font-semibold">Watch Now</h2>
+                 <ul>
+                   {providers.flatrate?.map((p) => (
+                     <li key={p.provider_id}>{p.provider_name}</li>
+                   ))}
+                 </ul>
+               </div>
+             )}
+           </div>
+         </div>
+       </div>
+     );
+   };
+
+   export default MovieDetails;
+   ```
+
+5. **FilterPanel.jsx**:
+   - Provides filters for genre, year, and rating, and sorting options.
+   ```jsx
+   // src/components/FilterPanel.jsx
+   const FilterPanel = ({ genres, filters, setFilters, setSort }) => {
+     const handleFilterChange = (e) => {
+       const { name, value } = e.target;
+       setFilters((prev) => ({ ...prev, [name]: value }));
+     };
+
+     return (
+       <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4">
+         <h2 className="text-lg font-semibold mb-2">Filters</h2>
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+           <select
+             name="genre"
+             onChange={handleFilterChange}
+             className="p-2 rounded bg-white dark:bg-gray-700"
+           >
+             <option value="">All Genres</option>
+             {genres.map((genre) => (
+               <option key={genre.id} value={genre.id}>
+                 {genre.name}
+               </option>
+             ))}
+           </select>
+           <input
+             type="number"
+             name="year"
+             placeholder="Release Year"
+             onChange={handleFilterChange}
+             className="p-2 rounded bg-white dark:bg-gray-700"
+           />
+           <select
+             name="rating"
+             onChange={handleFilterChange}
+             className="p-2 rounded bg-white dark:bg-gray-700"
+           >
+             <option value="">All Ratings</option>
+             <option value="7">7+</option>
+             <option value="8">8+</option>
+             <option value="9">9+</option>
+           </select>
+         </div>
+         <h2 className="text-lg font-semibold mt-4 mb-2">Sort By</h2>
+         <select
+           onChange={(e) => setSort(e.target.value)}
+           className="p-2 rounded bg-white dark:bg-gray-700"
+         >
+           <option value="popularity.desc">Popularity</option>
+           <option value="release_date.desc">Release Date</option>
+           <option value="vote_average.desc">Rating</option>
+           <option value="title.asc">Title (A-Z)</option>
+         </select>
+       </div>
+     );
+   };
+
+   export default FilterPanel;
+   ```
+
+6. **CategoryList.jsx**:
+   - Displays a list of movies for a category (e.g., Trending, New Releases).
+   ```jsx
+   // src/components/CategoryList.jsx
+   import MovieCard from './MovieCard';
+
+   const CategoryList = ({ title, movies }) => (
+     <div className="container mx-auto p-4">
+       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h2>
+       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+         {movies.map((movie) => (
+           <MovieCard key={movie.id} movie={movie} />
+         ))}
+       </div>
+     </div>
+   );
+
+   export default CategoryList;
+   ```
+
+---
+
+### 2. Use React Router for Navigation
+**Task**: Set up routes for `/`, `/search`, `/movie/:id`, `/browse/:category`.
+
+#### Steps
+1. **Create Pages Directory**:
+   - Run:
+     ```bash
+     mkdir src/pages
+     touch src/pages/{Home.jsx,Search.jsx,Movie.jsx,Browse.jsx,NotFound.jsx}
+     ```
+
+2. **Update App.jsx**:
+   - Configure React Router routes.
+   ```jsx
+   // src/App.jsx
+   import { BrowserRouter, Routes, Route } from 'react-router-dom';
+   import Home from './pages/Home';
+   import Search from './pages/Search';
+   import Movie from './pages/Movie';
+   import Browse from './pages/Browse';
+   import NotFound from './pages/NotFound';
+   import SearchBar from './components/SearchBar';
+
+   function App() {
+     return (
+       <BrowserRouter>
+         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+           <SearchBar />
+           <Routes>
+             <Route path="/" element={<Home />} />
+             <Route path="/search" element={<Search />} />
+             <Route path="/movie/:id" element={<Movie />} />
+             <Route path="/browse/:category" element={<Browse />} />
+             <Route path="*" element={<NotFound />} />
+           </Routes>
+         </div>
+       </BrowserRouter>
+     );
+   }
+
+   export default App;
+   ```
+
+3. **Implement Page Components**:
+   - **Home.jsx**: Displays trending movies and categories.
+     ```jsx
+     // src/pages/Home.jsx
+     import { useEffect, useState } from 'react';
+     import CategoryList from '../components/CategoryList';
+     import { getPopularMovies, getNowPlayingMovies } from '../api/tmdb';
+
+     const Home = () => {
+       const [popular, setPopular] = useState([]);
+       const [nowPlaying, setNowPlaying] = useState([]);
+
+       useEffect(() => {
+         getPopularMovies().then(setPopular);
+         getNowPlayingMovies().then(setNowPlaying);
+       }, []);
+
+       return (
+         <div>
+           <CategoryList title="Trending Now" movies={popular} />
+           <CategoryList title="Now Playing" movies={nowPlaying} />
+         </div>
+       );
+     };
+
+     export default Home;
+     ```
+   - **Search.jsx**: Handles search results with filters and infinite scroll (implemented later).
+     ```jsx
+     // src/pages/Search.jsx
+     import { useState, useEffect } from 'react';
+     import { useSearchParams } from 'react-router-dom';
+     import CategoryList from '../components/CategoryList';
+     import FilterPanel from '../components/FilterPanel';
+     import { searchMovies, getGenres } from '../api/tmdb';
+
+     const Search = () => {
+       const [searchParams] = useSearchParams();
+       const query = searchParams.get('q') || '';
+       const [movies, setMovies] = useState([]);
+       const [genres, setGenres] = useState([]);
+       const [filters, setFilters] = useState({ genre: '', year: '', rating: '' });
+       const [sort, setSort] = useState('popularity.desc');
+
+       useEffect(() => {
+         getGenres().then(setGenres);
+         searchMovies(query, filters, sort).then(setMovies);
+       }, [query, filters, sort]);
+
+       return (
+         <div className="container mx-auto p-4">
+           <FilterPanel genres={genres} filters={filters} setFilters={setFilters} setSort={setSort} />
+           {movies.length ? (
+             <CategoryList title={`Search Results for "${query}"`} movies={movies} />
+           ) : (
+             <p className="text-gray-600 dark:text-gray-400">No results found.</p>
+           )}
+         </div>
+       );
+     };
+
+     export default Search;
+     ```
+   - **Movie.jsx**: Displays movie details.
+     ```jsx
+     // src/pages/Movie.jsx
+     import { useEffect, useState } from 'react';
+     import { useParams } from 'react-router-dom';
+     import MovieDetails from '../components/MovieDetails';
+     import { getMovieDetails, getMovieCredits, getMovieVideos, getWatchProviders } from '../api/tmdb';
+
+     const Movie = () => {
+       const { id } = useParams();
+       const [movie, setMovie] = useState(null);
+       const [credits, setCredits] = useState(null);
+       const [videos, setVideos] = useState(null);
+       const [providers, setProviders] = useState(null);
+
+       useEffect(() => {
+         getMovieDetails(id).then(setMovie);
+         getMovieCredits(id).then(setCredits);
+         getMovieVideos(id).then(setVideos);
+         getWatchProviders(id).then(setProviders);
+       }, [id]);
+
+       if (!movie) return <p>Loading...</p>;
+
+       return <MovieDetails movie={movie} credits={credits} videos={videos} providers={providers} />;
+     };
+
+     export default Movie;
+     ```
+   - **Browse.jsx**: Displays movies for a specific category.
+     ```jsx
+     // src/pages/Browse.jsx
+     import { useEffect, useState } from 'react';
+     import { useParams } from 'react-router-dom';
+     import CategoryList from '../components/CategoryList';
+     import { getMoviesByCategory } from '../api/tmdb';
+
+     const Browse = () => {
+       const { category } = useParams();
+       const [movies, setMovies] = useState([]);
+
+       useEffect(() => {
+         getMoviesByCategory(category).then(setMovies);
+       }, [category]);
+
+       return <CategoryList title={category.replace('-', ' ')} movies={movies} />;
+     };
+
+     export default Browse;
+     ```
+   - **NotFound.jsx**: Handles invalid routes.
+     ```jsx
+     // src/pages/NotFound.jsx
+     const NotFound = () => (
+       <div className="container mx-auto p-4 text-center text-gray-900 dark:text-white">
+         <h1 className="text-3xl font-bold">404 - Page Not Found</h1>
+         <p className="mt-2">Sorry, the page you're looking for doesn't exist.</p>
+       </div>
+     );
+
+     export default NotFound;
+     ```
+
+---
+
+### 3. Implement Responsive Layouts with Tailwind CSS
+**Task**: Ensure components and pages are responsive using Tailwind CSS.
+
+#### Steps
+- **Global Styles**:
+  - Update `src/index.css` to include dark mode and Tailwind utilities:
+    ```css
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    body {
+      @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white;
+    }
+    ```
+- **Responsive Design**:
+  - Components like `CategoryList` and `FilterPanel` use Tailwind’s responsive grid classes (e.g., `grid-cols-2 sm:grid-cols-3 md:grid-cols-4`).
+  - `SearchBar` is centered with `max-w-2xl mx-auto`.
+  - `MovieDetails` uses flexbox with `flex-col md:flex-row` for responsive layout.
+- **Test Responsiveness**:
+  - Run `npm run dev` and test on different screen sizes using browser dev tools.
+
+---
+
+### 4. Search and Discovery
+**Task**: Build advanced search with Axios, fuzzy search with `fuse.js`, natural language query parsing with `compromise`, and filters/sorting.
+
+#### Steps
+1. **Install Dependencies**:
+   ```bash
+   npm install fuse.js compromise react-infinite-scroll-component react-lazy-load-image-component react-youtube
+   ```
+
+2. **Update TMDb API Utility**:
+   - Enhance `src/api/tmdb.js` with search, filter, and category endpoints:
+   ```js
+   // src/api/tmdb.js
+   import axios from 'axios';
+   import Fuse from 'fuse.js';
+   import nlp from 'compromise';
+   import { TMDB_API_KEY, TMDB_BASE_URL } from './config';
+
+   const tmdb = axios.create({
+     baseURL: TMDB_BASE_URL,
+     params: { api_key: TMDB_API_KEY },
+   });
+
+   export const getGenres = async () => {
+     try {
+       const response = await tmdb.get('/genre/movie/list');
+       return response.data.genres;
+     } catch (error) {
+       console.error('Error fetching genres:', error);
+       return [];
+     }
+   };
+
+   export const searchMovies = async (query, filters = {}, sort = 'popularity.desc') => {
+     try {
+       if (!query) return [];
+
+       // Parse natural language query
+       const doc = nlp(query);
+       const extractedQuery = doc.terms().out('text') || query;
+
+       // TMDb search
+       const response = await tmdb.get('/search/multi', {
+         params: {
+           query: extractedQuery,
+           with_genres: filters.genre,
+           primary_release_year: filters.year,
+           'vote_average.gte': filters.rating,
+           sort_by: sort,
+         },
+       });
+
+       let results = response.data.results.filter((item) => item.media_type === 'movie');
+
+       // Fuzzy search for misspellings
+       if (results.length < 5) {
+         const fuse = new Fuse(results, {
+           keys: ['title', 'overview'],
+           threshold: 0.4,
+         });
+         results = fuse.search(query).map(({ item }) => item);
+       }
+
+       return results;
+     } catch (error) {
+       console.error('Error searching movies:', error);
+       return [];
+     }
+   };
+
+   export const getMovieDetails = async (id) => {
+     try {
+       const response = await tmdb.get(`/movie/${id}`);
+       return response.data;
+     } catch (error) {
+       console.error('Error fetching movie details:', error);
+       return null;
+     }
+   };
+
+   export const getMovieCredits = async (id) => {
+     try {
+       const response = await tmdb.get(`/movie/${id}/credits`);
+       return response.data;
+     } catch (error) {
+       console.error('Error fetching credits:', error);
+       return null;
+     }
+   };
+
+   export const getMovieVideos = async (id) => {
+     try {
+       const response = await tmdb.get(`/movie/${id}/videos`);
+       return response.data.results;
+     } catch (error) {
+       console.error('Error fetching videos:', error);
+       return [];
+     }
+   };
+
+   export const getWatchProviders = async (id) => {
+     try {
+       const response = await tmdb.get(`/movie/${id}/watch/providers`);
+       return response.data.results.US; // Adjust for region
+     } catch (error) {
+       console.error('Error fetching providers:', error);
+       return null;
+     }
+   };
+
+   export const getPopularMovies = async () => {
+     try {
+       const response = await tmdb.get('/movie/popular');
+       return response.data.results;
+     } catch (error) {
+       console.error('Error fetching popular movies:', error);
+       return [];
+     }
+   };
+
+   export const getNowPlayingMovies = async () => {
+     try {
+       const response = await tmdb.get('/movie/now_playing');
+       return response.data.results;
+     } catch (error) {
+       console.error('Error fetching now playing movies:', error);
+       return [];
+     }
+   };
+
+   export const getMoviesByCategory = async (category) => {
+     try {
+       const endpoint = {
+         'trending-now': '/movie/popular',
+         'new-releases': '/movie/now_playing',
+         'top-rated': '/movie/top_rated',
+       }[category] || '/movie/popular';
+       const response = await tmdb.get(endpoint);
+       return response.data.results;
+     } catch (error) {
+       console.error('Error fetching category movies:', error);
+       return [];
+     }
+   };
+
+   export const getSimilarMovies = async (id) => {
+     try {
+       const response = await tmdb.get(`/movie/${id}/similar`);
+       return response.data.results;
+     } catch (error) {
+       console.error('Error fetching similar movies:', error);
+       return [];
+     }
+   };
+   ```
+
+3. **Enhance Search.jsx**:
+   - Add fuzzy search and natural language query handling:
+   ```jsx
+   // src/pages/Search.jsx
+   import { useState, useEffect } from 'react';
+   import { useSearchParams } from 'react-router-dom';
+   import InfiniteScroll from 'react-infinite-scroll-component';
+   import CategoryList from '../components/CategoryList';
+   import FilterPanel from '../components/FilterPanel';
+   import { searchMovies, getGenres } from '../api/tmdb';
+
+   const Search = () => {
+     const [searchParams] = useSearchParams();
+     const query = searchParams.get('q') || '';
+     const [movies, setMovies] = useState([]);
+     const [genres, setGenres] = useState([]);
+     const [filters, setFilters] = useState({ genre: '', year: '', rating: '' });
+     const [sort, setSort] = useState('popularity.desc');
+     const [page, setPage] = useState(1);
+     const [hasMore, setHasMore] = useState(true);
+
+     useEffect(() => {
+       getGenres().then(setGenres);
+       setMovies([]);
+       setPage(1);
+       searchMovies(query, filters, sort, 1).then((results) => {
+         setMovies(results);
+         setHasMore(results.length > 0);
+       });
+     }, [query, filters, sort]);
+
+     const loadMore = () => {
+       searchMovies(query, filters, sort, page + 1).then((newMovies) => {
+         setMovies((prev) => [...prev, ...newMovies]);
+         setPage((prev) => prev + 1);
+         setHasMore(newMovies.length > 0);
+       });
+     };
+
+     return (
+       <div className="container mx-auto p-4">
+         <FilterPanel genres={genres} filters={filters} setFilters={setFilters} setSort={setSort} />
+         {movies.length ? (
+           <InfiniteScroll
+             dataLength={movies.length}
+             next={loadMore}
+             hasMore={hasMore}
+             loader={<p className="text-center">Loading...</p>}
+           >
+             <CategoryList title={`Search Results for "${query}"`} movies={movies} />
+           </InfiniteScroll>
+         ) : (
+           <p className="text-gray-600 dark:text-gray-400">No results found.</p>
+         )}
+       </div>
+     );
+   };
+
+   export default Search;
+   ```
+
+4. **Update tmdb.js for Pagination**:
+   - Add page parameter to `searchMovies`:
+   ```js
+   export const searchMovies = async (query, filters = {}, sort = 'popularity.desc', page = 1) => {
+     try {
+       if (!query) return [];
+
+       const doc = nlp(query);
+       const extractedQuery = doc.terms().out('text') || query;
+
+       const response = await tmdb.get('/search/multi', {
+         params: {
+           query: extractedQuery,
+           with_genres: filters.genre,
+           primary_release_year: filters.year,
+           'vote_average.gte': filters.rating,
+           sort_by: sort,
+           page,
+         },
+       });
+
+       let results = response.data.results.filter((item) => item.media_type === 'movie');
+
+       if (results.length < 5) {
+         const fuse = new Fuse(results, {
+           keys: ['title', 'overview'],
+           threshold: 0.4,
+         });
+         results = fuse.search(query).map(({ item }) => item);
+       }
+
+       return results;
+     } catch (error) {
+       console.error('Error searching movies:', error);
+       return [];
+     }
+   };
+   ```
+
+---
+
+### 5. Movie Details Page
+**Task**: Fetch and display movie details, credits, trailers, and streaming providers.
+
+#### Steps
+- **Already Implemented**:
+  - `MovieDetails.jsx` and `Movie.jsx` handle fetching and displaying data.
+  - `tmdb.js` includes endpoints for details, credits, videos, and providers.
+- **Test**:
+  - Navigate to `/movie/27205` (Inception) to verify details, cast, trailer, and streaming providers.
+
+---
+
+### 6. Browse Categories
+**Task**: Create category pages for Trending, New Releases, etc., using TMDb endpoints.
+
+#### Steps
+- **Already Implemented**:
+  - `Browse.jsx` and `CategoryList.jsx` handle category display.
+  - `tmdb.js` includes `getMoviesByCategory` for `/movie/popular`, `/movie/now_playing`, `/movie/top_rated`.
+- **Curated Collections**:
+  - Add genre-based collections to `Home.jsx`:
+  ```jsx
+  // src/pages/Home.jsx
+  import { useEffect, useState } from 'react';
+  import CategoryList from '../components/CategoryList';
+  import { getPopularMovies, getNowPlayingMovies, getMoviesByCategory } from '../api/tmdb';
+
+  const Home = () => {
+    const [popular, setPopular] = useState([]);
+    const [nowPlaying, setNowPlaying] = useState([]);
+    const [actionMovies, setActionMovies] = useState([]);
+
+    useEffect(() => {
+      getPopularMovies().then(setPopular);
+      getNowPlayingMovies().then(setNowPlaying);
+      getMoviesByCategory('with_genres=28').then(setActionMovies); // Action genre ID
+    }, []);
+
+    return (
+      <div>
+        <CategoryList title="Trending Now" movies={popular} />
+        <CategoryList title="Now Playing" movies={nowPlaying} />
+        <CategoryList title="Action Movies" movies={actionMovies} />
+      </div>
+    );
+  };
+
+  export default Home;
+  ```
+- Update `tmdb.js` to support genre filtering:
+  ```js
+  export const getMoviesByCategory = async (category) => {
+    try {
+      let endpoint = '/movie/popular';
+      let params = {};
+      if (category.startsWith('with_genres')) {
+        endpoint = '/discover/movie';
+        params.with_genres = category.split('=')[1];
+      } else {
+        endpoint = {
+          'trending-now': '/movie/popular',
+          'new-releases': '/movie/now_playing',
+          'top-rated': '/movie/top_rated',
+        }[category] || '/movie/popular';
+      }
+      const response = await tmdb.get(endpoint, { params });
+      return response.data.results;
+    } catch (error) {
+      console.error('Error fetching category movies:', error);
+      return [];
+    }
+  };
+  ```
+
+---
+
+### 7. Performance Optimization
+**Task**: Implement lazy loading and infinite scroll.
+
+#### Steps
+- **Lazy Loading**:
+  - Already implemented in `MovieCard.jsx` using `react-lazy-load-image-component`.
+- **Infinite Scroll**:
+  - Already implemented in `Search.jsx` using `react-infinite-scroll-component`.
+- **Optimize API Calls**:
+  - Add debouncing to `SearchBar.jsx`:
+  ```jsx
+  // src/components/SearchBar.jsx
+  import { useState, useEffect } from 'react';
+  import { useNavigate } from 'react-router-dom';
+
+  const SearchBar = () => {
+    const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        if (query.trim()) {
+          navigate(`/search?q=${encodeURIComponent(query)}`);
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }, [query, navigate]);
+
+    return (
+      <form onSubmit={(e) => e.preventDefault()} className="w-full max-w-2xl mx-auto my-4">
+        <div className="relative">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search movies, genres, actors..."
+            className="w-full p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+    );
+  };
+
+  export default SearchBar;
+  ```
+
+---
+
+### 8. Error Handling
+**Task**: Display user-friendly error messages and suggest similar movies.
+
+#### Steps
+1. **Error Messages**:
+   - Update `Search.jsx` to show errors:
+   ```jsx
+   // src/pages/Search.jsx
+   import { useState, useEffect } from 'react';
+   import { useSearchParams } from 'react-router-dom';
+   import InfiniteScroll from 'react-infinite-scroll-component';
+   import CategoryList from '../components/CategoryList';
+   import FilterPanel from '../components/FilterPanel';
+   import { searchMovies, getGenres, getSimilarMovies } from '../api/tmdb';
+
+   const Search = () => {
+     const [searchParams] = useSearchParams();
+     const query = searchParams.get('q') || '';
+     const [movies, setMovies] = useState([]);
+     const [genres, setGenres] = useState([]);
+     const [filters, setFilters] = useState({ genre: '', year: '', rating: '' });
+     const [sort, setSort] = useState('popularity.desc');
+     const [page, setPage] = useState(1);
+     const [hasMore, setHasMore] = useState(true);
+     const [error, setError] = useState(null);
+     const [similarMovies, setSimilarMovies] = useState([]);
+
+     useEffect(() => {
+       getGenres().then(setGenres);
+       setMovies([]);
+       setPage(1);
+       setError(null);
+       searchMovies(query, filters, sort, 1).then((results) => {
+         if (results.length === 0) {
+           setError('No results found. Try a different search term.');
+           // Fetch similar movies for a related movie (e.g., first result or popular movie)
+           getSimilarMovies(27205).then(setSimilarMovies); // Example: Inception
+         } else {
+           setMovies(results);
+           setHasMore(results.length > 0);
+         }
+       }).catch(() => {
+         setError('An error occurred while searching. Please try again later.');
+       });
+     }, [query, filters, sort]);
+
+     const loadMore = () => {
+       searchMovies(query, filters, sort, page + 1).then((newMovies) => {
+         setMovies((prev) => [...prev, ...newMovies]);
+         setPage((prev) => prev + 1);
+         setHasMore(newMovies.length > 0);
+       });
+     };
+
+     return (
+       <div className="container mx-auto p-4">
+         <FilterPanel genres={genres} filters={filters} setFilters={setFilters} setSort={setSort} />
+         {error ? (
+           <div>
+             <p className="text-red-500">{error}</p>
+             {similarMovies.length > 0 && (
+               <CategoryList title="You Might Like" movies={similarMovies} />
+             )}
+           </div>
+         ) : movies.length ? (
+           <InfiniteScroll
+             dataLength={movies.length}
+             next={loadMore}
+             hasMore={hasMore}
+             loader={<p className="text-center">Loading...</p>}
+           >
+             <CategoryList title={`Search Results for "${query}"`} movies={movies} />
+           </InfiniteScroll>
+         ) : (
+           <p className="text-gray-600 dark:text-gray-400">No results found.</p>
+         )}
+       </div>
+     );
+   };
+
+   export default Search;
+   ```
+
+2. **Similar Movies**:
+   - Already implemented in `tmdb.js` with `getSimilarMovies`.
+   - Displayed in `Search.jsx` when no results are found.
+
+---
+
+### Testing and Verification
+1. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+2. **Test Routes**:
+   - `/`: Verify Trending and Now Playing categories.
+   - `/search?q=Inception`: Test search results, filters, and infinite scroll.
+   - `/movie/27205`: Check movie details, cast, trailer, and providers.
+   - `/browse/trending-now`: Ensure category movies load.
+3. **Test Responsiveness**:
+   - Use browser dev tools to test mobile, tablet, and desktop layouts.
+4. **Test Error Handling**:
+   - Search for gibberish (e.g., `xyz123`) to verify error message and similar movies.
+5. **Lint and Format**:
+   ```bash
+   npm run lint
+   ```
+
+---
+
+### Commit Changes
+```bash
+git add .
+git commit -m "Implement Phase 2: Core features with search, movie details, categories, and optimizations"
+git push origin main
+```
+
+---
+
+### Notes
+- **TMDb API Limits**: Cache responses in production using localStorage or a backend to avoid rate limits.
+- **Natural Language Queries**: `compromise` is basic; for advanced NLP, consider a backend service later.
+- **Streaming Providers**: TMDb’s watch providers are region-specific (hardcoded to `US`); make dynamic in future phases.
+- **Next Steps**: Proceed to Phase 3 for UX enhancements (dark mode, PWA, accessibility).
+
+Let me know if you need help debugging, adding specific features, or moving to the next phase!
